@@ -1,0 +1,54 @@
+<div class="conatiner">
+    <form novalidate [formGroup]="authorForm">
+        <div>
+            <label for="surname">Фамилия</label>
+            <input class="form-control" type="text" id="surname" formControlName="surname">
+        </div>
+        <div>
+            <label for="firstName">Имя</label>
+            <input class="form-control" type="text" id="firstName" formControlName="firstName">
+        </div>
+        <div>
+            <label for="patronymic">Отчество</label>
+            <input class="form-control" type="text" id="patronymic" formControlName="patronymic">
+        </div>
+        <div>
+            <label for="bithDate">Дата рождения</label>
+            <input class="form-control" type="text" id="bithDate" formControlName="bithDate">
+        </div>
+        <fieldset class="border border-secondary p-2 mt-3" formGroupName="listBook">
+            <div>
+                <label>Книги:</label><a class="btn link-primary" (click)="addBook()">Добавить книгу</a>
+            </div>
+            
+            <div>
+                <label for="title">Название</label>
+                <input class="form-control" type="text" id="title" formControlName="title">
+            </div>
+            <div>
+                <label for="numberOfPages">Количество страниц</label>
+                <input class="form-control" type="text" id="numberOfPages" formControlName="numberOfPages">
+            </div>
+            <div>
+                <label for="genres">Жанр</label>
+                <input class="form-control" type="text" id="genres" formControlName="genres">
+            </div> 
+            
+        </fieldset>
+        <div>
+            <input type="submit" class="btn m-2"> <input type="reset" class="btn m-2">
+        </div>
+    </form>
+    <div> 
+        <div class="d-flex justify-content-around border border-danger p-2 m-2" *ngFor="let b of books ">
+            <div class="mr-5">
+                <p> {{ b.title }} </p>
+                <p> {{ b.genre }} {{ b.pages }} страниц</p>
+            </div>
+            <div class="d-flex flex-column">
+                <a href="#">Редактировать</a>
+                <a href="#">Удалить</a>
+            </div>
+        </div>
+    </div>
+</div>

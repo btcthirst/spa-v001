@@ -6,17 +6,23 @@ import { AppComponent } from './app.component';
 import { AuthorComponent } from './author/author.component';
 import { GenresComponent } from './genres/genres.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
+import { AddAuthorComponent } from './add-author/add-author.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthorComponent,
     GenresComponent,
-    NotFoundPageComponent
+    NotFoundPageComponent,
+    AddAuthorComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
