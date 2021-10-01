@@ -1,5 +1,5 @@
 <div class="conatiner">
-    <form novalidate [formGroup]="authorForm">
+    <form novalidate (ngSubmit)="onSubmit()" [formGroup]="authorForm">
         <div>
             <label for="surname">Фамилия</label>
             <input class="form-control" type="text" id="surname" formControlName="surname">
@@ -16,27 +16,34 @@
             <label for="bithDate">Дата рождения</label>
             <input class="form-control" type="text" id="bithDate" formControlName="bithDate">
         </div>
-        <fieldset class="border border-secondary p-2 mt-3" formGroupName="listBook">
-            <div>
-                <label>Книги:</label><a class="btn link-primary" (click)="addBook()">Добавить книгу</a>
-            </div>
-            
-            <div>
-                <label for="title">Название</label>
-                <input class="form-control" type="text" id="title" formControlName="title">
-            </div>
-            <div>
-                <label for="numberOfPages">Количество страниц</label>
-                <input class="form-control" type="number" id="numberOfPages" formControlName="numberOfPages" >
-            </div>
-            <div>
-                <label for="genres">Жанр</label>
-                <input class="form-control" type="text" id="genres" formControlName="genres">
-            </div> 
-            
-        </fieldset>
+        <div>
+            <label>Книги:</label>
+            <a *ngIf="!toggle" class="btn link-primary" (click)="toggler()">Добавить книгу</a>
+            <a *ngIf="toggle" class="btn link-primary" (click)="toggler()">Отменить</a>
+         </div>
+        
         <div>
             <input type="submit" class="btn m-2"> <input type="reset" class="btn m-2">
+        </div>
+    </form>
+    <form *ngIf="toggle" (ngSubmit)="addBook()" class="border border-secondary p-2 mt-3" [formGroup]="listBook">
+            
+            
+        <div>
+            <label for="title">Название</label>
+            <input class="form-control" type="text" id="title" formControlName="title">
+        </div>
+        <div>
+            <label for="numberOfPages">Количество страниц</label>
+            <input class="form-control" type="number" id="numberOfPages" formControlName="numberOfPages" >
+        </div>
+        <div>
+            <label for="genres">Жанр</label>
+            <input class="form-control" type="text" id="genres" formControlName="genres">
+        </div> 
+        <div>
+            <input class="btn m-2" type="submit" >
+            <input class="btn m-2" type="reset"  >
         </div>
     </form>
     <div> 

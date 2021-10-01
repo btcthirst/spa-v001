@@ -8,6 +8,7 @@ import { Book } from '../models/book';
   styleUrls: ['./add-author.component.css']
 })
 export class AddAuthorComponent implements OnInit {
+  toggle=false
   authorForm!: FormGroup
   firstName!:FormControl
   patronymic!:FormControl
@@ -28,7 +29,7 @@ export class AddAuthorComponent implements OnInit {
   }
   createControls(){
     this.firstName = new FormControl("", Validators.required);
-    this.patronymic = new FormControl("", Validators.required);
+    this.patronymic = new FormControl();
     this.surname = new FormControl("", Validators.required);
     this.bithDare = new FormControl("", Validators.required);
     this.title = new FormControl("", Validators.required);
@@ -46,7 +47,7 @@ export class AddAuthorComponent implements OnInit {
       firstName: this.firstName,
       patronymic:this.patronymic,
       bithDate: this.bithDare,
-      listBook: this.listBook
+      /* listBook: this.listBook */
     });
   }
   addBook(){
@@ -56,8 +57,20 @@ export class AddAuthorComponent implements OnInit {
       
       this.books.push(book)
       this.listBook.reset()
+      this.toggler()
     }
     
+  }
+
+  onSubmit(){
+    if(this.authorForm.valid && this.books.length>0){
+      this.authorForm.value.listBook =this.books
+      console.log(this.authorForm.value)
+    }
+  }
+
+  toggler(){
+    this.toggle=!this.toggle
   }
 }
 
