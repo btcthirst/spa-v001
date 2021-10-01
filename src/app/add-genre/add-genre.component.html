@@ -1,0 +1,17 @@
+<div>
+    <form (ngSubmit)="onSubmit()" [formGroup]="addGenreForm">
+        <div>
+            <label for="genreName">Жанр</label>
+            <input class="form-control" type="text" name="" id="genreName" formControlName="genreName">
+        </div>
+        <div>
+            <label for="description">Описание</label>
+            <textarea class="form-control" id="description"  formControlName="description"></textarea>
+        </div>
+        <div class="text-center">
+            <input class="btn border border-success m-2" type="submit">
+            <input class="btn border border-secondary m-2" type="reset" >
+        </div>
+        
+    </form>
+</div>

@@ -9,10 +9,14 @@ import { GenreService } from '../services/genre.service';
 })
 export class GenresComponent implements OnInit {
   genres!:Genre[]
+  toggle=false
   constructor(private genreService: GenreService) { }
 
   ngOnInit(): void {
     this.genres=this.genreService.getGenres()
   }
 
+  toggler(){
+    this.toggle = !this.toggle
+  }
 }

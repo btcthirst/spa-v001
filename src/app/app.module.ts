@@ -8,6 +8,7 @@ import { GenresComponent } from './genres/genres.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { AddAuthorComponent } from './add-author/add-author.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AddGenreComponent } from './add-genre/add-genre.component';
 
 
 
@@ -17,7 +18,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AuthorComponent,
     GenresComponent,
     NotFoundPageComponent,
-    AddAuthorComponent
+    AddAuthorComponent,
+    AddGenreComponent
   ],
   imports: [
     BrowserModule,
