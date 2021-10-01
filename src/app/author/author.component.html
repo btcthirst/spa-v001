@@ -10,21 +10,12 @@
                 <th>Книг в базе</th>
                 <th></th>
             </tr>
-            <tr>
-                <td>Пушкин А.С.</td>
-                <td>5</td>
+            <tr *ngFor="let a of authors">
+                <td>{{ a.surname }} {{ a.firstName }} {{ a.patronymic }}  </td>
+                <td> {{ a.books.length }} </td>
                 <td><a href="">Редактировать</a><a href="">Удалить</a><a href="">Детали</a></td>
             </tr>
-            <tr>
-                <td>Тургеньев И.С.</td>
-                <td>1</td>
-                <td><a href="">Редактировать</a><a href="">Удалить</a><a href="">Детали</a></td>
-            </tr>
-            <tr>
-                <td>Шевченко Т.Г.</td>
-                <td>2</td>
-                <td><a href="">Редактировать</a><a href="">Удалить</a><a href="">Детали</a></td>
-            </tr>
+            
         </table>
     </div>
 </div>
