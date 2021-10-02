@@ -30,7 +30,7 @@ export class AddGenreComponent implements OnInit {
 
   onSubmit(){
     if (this.addGenreForm.valid){
-      console.log("submit it")
+      console.log("submit it",this.addGenreForm.value)
       this.addGenreForm.reset()
     }
     

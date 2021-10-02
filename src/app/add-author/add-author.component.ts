@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Author } from '../models/author';
 import { Book } from '../models/book';
+import { AuthorCrudsService } from '../services/author-cruds.service';
 
 @Component({
   selector: 'app-add-author',
@@ -19,13 +21,13 @@ export class AddAuthorComponent implements OnInit {
   numberOfPages!:FormControl
   genres!: FormControl
   books:Book[]=[new Book('fsfdsfd', 20,'fsfdsfd')]//книга добавлнена только для разработки
-  constructor() { }
+  constructor( private cruds: AuthorCrudsService) { }
 
   
   ngOnInit(): void {
     this.createControls();
     this.createForm();
-    console.log(this.authorForm)
+    
   }
   createControls(){
     this.firstName = new FormControl("", Validators.required);
@@ -64,8 +66,9 @@ export class AddAuthorComponent implements OnInit {
 
   onSubmit(){
     if(this.authorForm.valid && this.books.length>0){
-      this.authorForm.value.listBook =this.books
+      this.authorForm.value.books =this.books
       console.log(this.authorForm.value)
+      this.cruds.createAuthor(this.authorForm.value as Author)
     }
   }
 

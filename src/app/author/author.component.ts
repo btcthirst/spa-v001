@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Author } from '../models/author';
+import { AuthorCrudsService } from '../services/author-cruds.service';
 import { AuthorService } from '../services/author.service';
 
 @Component({
@@ -9,10 +10,19 @@ import { AuthorService } from '../services/author.service';
 })
 export class AuthorComponent implements OnInit {
   authors!: Author[]
-  constructor(private authorGet: AuthorService) { }
+  constructor(private authorGet: AuthorCrudsService) { }
 
   ngOnInit(): void {
-    this.authors=this.authorGet.getAuthorFrom()
+    this.getter()
+  }
+
+  getter(){
+    let auth =this.authorGet.getAllAuthor()
+    if(auth==null){
+      console.log("NO DATA")
+    }else{
+      this.authors=auth
+    }
   }
 
 }
