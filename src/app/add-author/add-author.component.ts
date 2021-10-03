@@ -67,9 +67,9 @@ export class AddAuthorComponent implements OnInit {
   onSubmit(){
     if(this.authorForm.valid && this.books.length>0){
       this.authorForm.value.books =this.books
-      console.log(this.authorForm.value)
       this.cruds.createAuthor(this.authorForm.value as Author)
     }
+    this.authorForm.reset()    
   }
 
   toggler(){

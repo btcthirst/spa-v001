@@ -13,7 +13,10 @@
             <tr *ngFor="let a of authors">
                 <td>{{ a.surname }} {{ a.firstName }} {{ a.patronymic }}  </td>
                 <td> {{ a.books.length }} </td>
-                <td><a href="">Редактировать</a><a href="">Удалить</a><a href="">Детали</a></td>
+                <td><button class="link-primary m-2">Редактировать</button>
+                    <button class="link-danger m-2 " (click)="deleteItem()">Удалить</button>
+                    <button class="link-primary m-2">Детали</button>
+                </td>
             </tr>
             
         </table>

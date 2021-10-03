@@ -7,6 +7,7 @@ import { Book } from '../models/book';
 })
 export class AuthorService {
   authors!: Author[]
+  key:string='author'
   pushkinBooks:Book[]=[
     new Book("Дубровский",200,"роман"),
     new Book("Пиковая дама",20,"рассказ"),
@@ -24,33 +25,123 @@ export class AuthorService {
   constructor() { 
     //наполняем массив Авторы
     this.authors=[
-      new Author("Александр","Пушкин",new Date(6,6,1799),this.pushkinBooks,"Сергеевич"),
-      new Author("Иван","Тургеньев",new Date(9,11,1818),this.turgenyevBooks,"Сергеевич"),
-      new Author("Тарас","Шевченко",new Date(9,3,1814),this.shevchenkoBooks,"Григорьевич"),
+      new Author(1,"Александр","Пушкин",new Date(6,6,1799),this.pushkinBooks,"Сергеевич"),
+      new Author(2,"Иван","Тургеньев",new Date(9,11,1818),this.turgenyevBooks,"Сергеевич"),
+      new Author(3,"Тарас","Шевченко",new Date(9,3,1814),this.shevchenkoBooks,"Григорьевич"),
     ]
   }
-  //возвращаем массив по запросу
-  getAuthorFrom(){
-    return this.authors
+  //возвращаем тестовый массив по запросу
+  getAuthorFrom(){    
+    return this.authors       
   }
 
-  //записываем массив в локальное хранилище
-  setAuthorInStorage(){
-    if(!localStorage.getItem('author')){
-      localStorage.setItem("author", JSON.stringify(this.authors))
-    }   
+  //возвращаем сохраненный массив по запросу
+  getAllFromStorage(): Author[]{
+    //получаем массив с локального хранилища
+    let testAuth=localStorage.getItem(this.key)
+    //если там ничего нет    
+    if(testAuth==null){
+      //возвращаем заготовку(возможны другие варианты в будущем)
+      this.setAllToStorage(this.getAuthorFrom())
+      return this.getAuthorFrom()
+    }else{
+      //возвращаем отпарсенные данные из хранилища
+      return JSON.parse(testAuth)
+    }
   }
 
-  //берем массив с хранилища
-  getAuthorFromStorage(){
-    let test =localStorage.getItem("author")
-    if(test==null){
-      console.log("ничего не вернулось")
-    } else{
-      this.authors=JSON.parse(test) 
-      
+  //сохранение данных в локальное хранилище
+  setAllToStorage(auth: Author[]){
+    //добавляем полученые данные
+    localStorage.setItem(this.key,JSON.stringify(auth))
+  }
+
+  //добавление одного айтема
+  setOneItem(a: Author){
+    //получаем массив данных которые есть
+    let authors=this.getAllFromStorage()
+    
+    if(a.id===undefined){
+      a.id=this.creatorId()
+      console.log("catch without id", a.id)
+      //добавляем в массив новый айтем
+      authors.push(a)
+      //отправляем массив в локальное хранилище
+      this.setAllToStorage(authors)
+    }else{
+      console.log("такой автор уже есть")
     }
     
     
+    
+    
   }
+  
+  //получение одного айтема
+  getAuthByID(id:number):Author| string{
+
+    //получаем данные
+    let auth = this.getAllFromStorage()
+
+    //ищем нужный айтем     
+    for(let a of auth){
+
+      //если существует возвращаем
+      if(a.id==id){
+        return a
+      }
+    }
+    return "нет таких"
+  }
+
+  //изменение данных
+  upadateAuthor(auth: Author){
+    let authors=this.getAllFromStorage()
+    for(let a of authors){
+      if(a.id==auth.id){
+        a.firstName =auth.firstName
+        a.patronymic=auth.patronymic
+        a.surname=auth.surname
+        a.bithDate=auth.bithDate
+        a.books=auth.books
+      }
+    }
+    this.setAllToStorage(this.authors)
+  }
+
+  //удаление айтема
+  deleteAuthor(id:number){
+    let authors=this.getAllFromStorage()
+    authors.filter(a=>{
+      if(a.id!=id){
+        return a
+      }
+      return null
+    })
+    this.setAllToStorage(authors)
+  }
+
+  creatorId(){
+    let auth= this.getAllFromStorage()
+    let len =auth.length
+    let count
+    for(let i=1;;i++){
+      count=0
+      for(let a of auth){
+        console.log(a.id,i)
+        if(a.id==i){
+          console.log("in")
+          count++
+        }
+      }
+      if(count==0){
+        return i
+      }
+
+    }    
+    
+    
+  }
+    
+  
 }
