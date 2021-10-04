@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Author } from '../models/author';
 import { Book } from '../models/book';
 import { Genre } from '../models/genre';
@@ -7,11 +8,12 @@ import { AuthorCrudsService } from '../services/author-cruds.service';
 import { GenreCrudsService } from '../services/genre-cruds.service';
 
 @Component({
-  selector: 'app-add-author',
-  templateUrl: './add-author.component.html',
-  styleUrls: ['./add-author.component.css']
+  selector: 'app-upd-author',
+  templateUrl: './upd-author.component.html',
+  styleUrls: ['./upd-author.component.css']
 })
-export class AddAuthorComponent implements OnInit {
+export class UpdAuthorComponent implements OnInit {
+  editingAuth!:Author
   genreList!: Genre[]
   toggle=false
   authorForm!: FormGroup
@@ -23,21 +25,42 @@ export class AddAuthorComponent implements OnInit {
   title!: FormControl
   numberOfPages!:FormControl
   genres!: FormControl
-  books:Book[]=[]
-  constructor( private cruds: AuthorCrudsService, private genreCrudService: GenreCrudsService) { }
+  books!:Book[]
+  constructor( private cruds: AuthorCrudsService,
+    private genreCrudService: GenreCrudsService,
+    private activatedRouter: ActivatedRoute) { }
 
   
   ngOnInit(): void {
+    this.getAuthorToEdit()
+    this.getGenreList()
     this.createControls();
-    this.createForm();
-    this.genreList= this.genreCrudService.getAllGenre()
-    
+    this.createForm();    
   }
+  getGenreList(){
+    this.genreList= this.genreCrudService.getAllGenre()
+  }
+  getAuthorToEdit(){
+    this.activatedRouter.params.subscribe(res=>{
+      let testData= this.cruds.getAuthorByID(res.id)
+      if(testData=="нет таких"){
+        console.log("ошибка нет автора с таким ID")
+      } else{
+        this.editingAuth = testData as Author
+        this.books=this.editingAuth.books
+        
+      }
+      
+      
+
+    })
+  }
+
   createControls(){
-    this.firstName = new FormControl("", Validators.required);
-    this.patronymic = new FormControl();
-    this.surname = new FormControl("", Validators.required);
-    this.bithDare = new FormControl("", Validators.required);
+    this.firstName = new FormControl(`${this.editingAuth.firstName}`, Validators.required);
+    this.patronymic = new FormControl(`${this.editingAuth.patronymic}`);
+    this.surname = new FormControl(`${this.editingAuth.surname}`, Validators.required);
+    this.bithDare = new FormControl(`${this.editingAuth.bithDate}`, Validators.required);
     this.title = new FormControl("", Validators.required);
     this.numberOfPages = new FormControl("", Validators.required);
     this.genres = new FormControl("", Validators.required);
@@ -69,9 +92,15 @@ export class AddAuthorComponent implements OnInit {
   }
 
   onSubmit(){
-    if(this.authorForm.valid && this.books.length>0){
-      this.authorForm.value.books =this.books
-      this.cruds.createAuthor(this.authorForm.value as Author)
+    if(this.authorForm.valid && this.books.length>0){      
+      let author =this.authorForm.value as Author
+      
+      this.editingAuth.books=this.books
+      this.editingAuth.surname =author.surname
+      this.editingAuth.firstName= author.firstName
+      this.editingAuth.patronymic= author.patronymic
+      this.editingAuth.bithDate=author.bithDate
+      this.cruds.updateAuthor(this.editingAuth)
     }
     this.authorForm.reset()    
   }
@@ -79,5 +108,5 @@ export class AddAuthorComponent implements OnInit {
   toggler(){
     this.toggle=!this.toggle
   }
-}
 
+}

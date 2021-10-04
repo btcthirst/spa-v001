@@ -1,11 +1,11 @@
 export class Book {
     
     constructor(
-        private _title: string,
-        private _pages: number,
-        private _genre: string){}
+        public title: string,
+        public pages: number,
+        public genre: string){}
       
-    get title(){
+    /* get title(){
       return this._title
     }
     set title(val: string){
@@ -24,6 +24,6 @@ export class Book {
     }
     set genre(val: string){
       this._genre=val
-    }
+    } */
       
 }

@@ -5,6 +5,7 @@ import { AddGenreComponent } from './add-genre/add-genre.component';
 import { AuthorComponent } from './author/author.component';
 import { GenresComponent } from './genres/genres.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
+import { UpdAuthorComponent } from './upd-author/upd-author.component';
 import { UpdGenreComponent } from './upd-genre/upd-genre.component';
 
 const routes: Routes = [
@@ -12,7 +13,8 @@ const routes: Routes = [
   {path:'authors',
     children:[
       {path:'', component: AuthorComponent},
-      {path:'add-author', component: AddAuthorComponent}
+      {path:'add-author', component: AddAuthorComponent},
+      {path:'update/:id', component: UpdAuthorComponent}
     ]
   },
   {path:'genres',

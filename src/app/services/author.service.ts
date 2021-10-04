@@ -63,7 +63,7 @@ export class AuthorService {
     
     if(a.id===undefined){
       a.id=this.creatorId()
-      console.log("catch without id", a.id)
+      
       //добавляем в массив новый айтем
       authors.push(a)
       //отправляем массив в локальное хранилище
@@ -130,9 +130,9 @@ export class AuthorService {
     for(let i=1;;i++){
       count=0
       for(let a of auth){
-        console.log(a.id,i)
+        
         if(a.id==i){
-          console.log("in")
+          
           count++
         }
       }

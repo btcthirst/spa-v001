@@ -1,17 +1,22 @@
-<div class="bg-light col-xl-5 m-auto">
-    <form class="m-auto " (ngSubmit)="onSubmit()" [formGroup]="addGenreForm">
-        <div>
-            <label for="name">Жанр</label>
-            <input class="form-control" type="text" name="" id="name" formControlName="name">
-        </div>
-        <div>
-            <label for="description">Описание</label>
-            <textarea class="form-control" id="description"  formControlName="description"></textarea>
-        </div>
-        <div class="text-center">
-            <input class="btn border border-success m-2" type="submit">
-            <input class="btn border border-secondary m-2" type="reset" >
-        </div>
+<div>
+    <button class="btn link-primary" (click)="goBack()">Обратно</button>
+   <div class="bg-light col-xl-5 m-auto">
         
-    </form>
+        <form class="m-auto " (ngSubmit)="onSubmit()" [formGroup]="addGenreForm">
+            <div>
+                <label for="name">Жанр</label>
+                <input class="form-control" type="text" name="" id="name" formControlName="name">
+            </div>
+            <div>
+                <label for="description">Описание</label>
+                <textarea class="form-control" id="description"  formControlName="description"></textarea>
+            </div>
+            <div class="text-center">
+                <input class="btn border border-success m-2" type="submit">
+                <input class="btn border border-secondary m-2" type="reset" >
+            </div>
+            
+        </form>
+    </div> 
 </div>
+

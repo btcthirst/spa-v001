@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Genre } from '../models/genre';
 import { GenreCrudsService } from '../services/genre-cruds.service';
 
@@ -12,7 +13,8 @@ export class AddGenreComponent implements OnInit {
   addGenreForm!: FormGroup
   genreName!: FormControl
   description!: FormControl
-  constructor(private genreCRUDService:GenreCrudsService) { }
+  constructor(private genreCRUDService:GenreCrudsService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.createControl()
@@ -30,6 +32,10 @@ export class AddGenreComponent implements OnInit {
     })
   }
 
+  goBack(){
+    this.router.navigate(['/genres'])
+  }
+  
   onSubmit(){
     if (this.addGenreForm.valid){
       console.log("submit it",this.addGenreForm.value)
@@ -38,4 +44,6 @@ export class AddGenreComponent implements OnInit {
     }
     
   }
+
+  
 }

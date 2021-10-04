@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Author } from '../models/author';
 import { AuthorCrudsService } from '../services/author-cruds.service';
 
@@ -10,7 +11,9 @@ import { AuthorCrudsService } from '../services/author-cruds.service';
 })
 export class AuthorComponent implements OnInit {
   authors!: Author[]
-  constructor(private authorGet: AuthorCrudsService) { }
+  constructor(private authorGet: AuthorCrudsService,
+    private router: Router  
+  ) { }
 
   ngOnInit(): void {
     this.getter()
@@ -21,7 +24,8 @@ export class AuthorComponent implements OnInit {
     
   }
 
-  updateItem(){
+  updateItem(id:number){
+    this.router.navigate([`/authors/update/${id}`])
     console.log("test update")
   }
 

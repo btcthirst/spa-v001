@@ -47,7 +47,7 @@ export class GenreService {
     
     if(g.id===undefined){
       g.id=this.creatorId()
-      console.log("catch without id", g.id)
+      
       //добавляем в массив новый айтем
       genres.push(g)
       //отправляем массив в локальное хранилище
@@ -109,9 +109,9 @@ export class GenreService {
     for(let i=1;;i++){
       count=0
       for(let g of genre){
-        console.log(g.id,i)
+        
         if(g.id==i){
-          console.log("in")
+          
           count++
         }
       }

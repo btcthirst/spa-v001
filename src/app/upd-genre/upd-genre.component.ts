@@ -49,6 +49,9 @@ export class UpdGenreComponent implements OnInit {
       description: this.description
     })
   }
+  goBack(){
+    this.router.navigate(['/genres'])
+  }
 
   onSubmit(){
     if (this.updateGenreForm.valid){
@@ -58,8 +61,7 @@ export class UpdGenreComponent implements OnInit {
       this.genre.description=dirtyGenre.description
       this.genreCRUDService.updateGenre(this.genre)
       this.router.navigate(['/genres'])
-    }
-    
+    }    
   }
 
 }
