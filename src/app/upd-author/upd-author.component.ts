@@ -82,12 +82,30 @@ export class UpdAuthorComponent implements OnInit {
   addBook(){
     
     if(this.listBook.valid){
-      let book=new Book(this.title.value,this.numberOfPages.value,this.genres.value) 
+      let id= this.creatorId()
+      let book=new Book(id,this.title.value,this.numberOfPages.value,this.genres.value) 
       
       this.books.push(book)
       this.listBook.reset()
       this.toggler()
     }
+    
+  }
+
+  creatorId(){
+    let books= this.books  
+    let count
+    for(let i=1;;i++){
+      count=0
+      for(let b of books){        
+        if(b.id==i){          
+          count++
+        }
+      }
+      if(count==0){
+        return i
+      }
+    } 
     
   }
 
@@ -101,8 +119,9 @@ export class UpdAuthorComponent implements OnInit {
       this.editingAuth.patronymic= author.patronymic
       this.editingAuth.bithDate=author.bithDate
       this.cruds.updateAuthor(this.editingAuth)
+      this.authorForm.reset()  
     }
-    this.authorForm.reset()    
+      
   }
 
   toggler(){

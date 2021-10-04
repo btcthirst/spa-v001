@@ -1,0 +1,34 @@
+<div>
+    <form *ngIf="toggleLock" 
+        (ngSubmit)="updateBook()"
+        class="border border-secondary p-2 mt-3"
+        [formGroup]="updBook">
+            
+            
+        <div>
+            <label for="title">Название</label>
+            <input class="form-control" type="text" id="title" formControlName="title">
+        </div>
+        <div>
+            <label for="numberOfPages">Количество страниц</label>
+            <input class="form-control" type="number" id="numberOfPages" formControlName="numberOfPages" >
+        </div>
+        <div>
+            <label for="genres">Жанр</label>
+            
+            <select
+                class="form-control"
+                id="genres"
+                formControlName="genres"
+                
+            >
+                <option selected>Выберите жанр</option>
+                <option *ngFor="let g of genreList" > {{ g.name }}</option>
+            </select>
+        </div> 
+        <div>
+            <input class="btn m-2" type="submit" >
+            <input class="btn m-2" type="button" (click)="goBack()" value="Отменить"  >
+        </div>
+    </form>
+</div>

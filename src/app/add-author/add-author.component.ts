@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Author } from '../models/author';
 import { Book } from '../models/book';
 import { Genre } from '../models/genre';
@@ -14,6 +15,7 @@ import { GenreCrudsService } from '../services/genre-cruds.service';
 export class AddAuthorComponent implements OnInit {
   genreList!: Genre[]
   toggle=false
+  togg=0
   authorForm!: FormGroup
   firstName!:FormControl
   patronymic!:FormControl
@@ -24,7 +26,9 @@ export class AddAuthorComponent implements OnInit {
   numberOfPages!:FormControl
   genres!: FormControl
   books:Book[]=[]
-  constructor( private cruds: AuthorCrudsService, private genreCrudService: GenreCrudsService) { }
+  constructor( private cruds: AuthorCrudsService,
+    private genreCrudService: GenreCrudsService,
+    private router: Router) { }
 
   
   ngOnInit(): void {
@@ -59,7 +63,8 @@ export class AddAuthorComponent implements OnInit {
   addBook(){
     
     if(this.listBook.valid){
-      let book=new Book(this.title.value,this.numberOfPages.value,this.genres.value) 
+      let id = this.creatorId()
+      let book=new Book(id,this.title.value,this.numberOfPages.value,this.genres.value) 
       
       this.books.push(book)
       this.listBook.reset()
@@ -68,12 +73,43 @@ export class AddAuthorComponent implements OnInit {
     
   }
 
+  deleteBook(id: number){
+    this.books= this.books.filter(book=>{
+      if(book.id==id){
+        return null
+      }
+      return book
+    })
+  }
+
+  creatorId(){
+    let books= this.books 
+    let count
+    for(let i=1;;i++){
+      count=0
+      for(let b of books){        
+        if(b.id==i){          
+          count++
+        }
+      }
+      if(count==0){
+        return i
+      }
+    } 
+    
+  }
+
+  updateBook(id: number){
+    this.togg=id
+  }
+
   onSubmit(){
     if(this.authorForm.valid && this.books.length>0){
       this.authorForm.value.books =this.books
       this.cruds.createAuthor(this.authorForm.value as Author)
+      this.router.navigate(['/authors']) 
     }
-    this.authorForm.reset()    
+     
   }
 
   toggler(){

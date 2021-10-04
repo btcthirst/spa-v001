@@ -103,24 +103,19 @@ export class GenreService {
   }
 
   creatorId(){
-    let genre= this.getAllFromStorage()
-  
+    let genre= this.getAllFromStorage()  
     let count
     for(let i=1;;i++){
       count=0
-      for(let g of genre){
-        
-        if(g.id==i){
-          
+      for(let g of genre){        
+        if(g.id==i){          
           count++
         }
       }
       if(count==0){
         return i
       }
-
-    }    
-    
+    } 
     
   }
 }

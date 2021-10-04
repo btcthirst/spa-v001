@@ -62,9 +62,10 @@
                 <p> {{ b.genre }} {{ b.pages }} страниц</p>
             </div>
             <div class="d-flex flex-column">
-                <a href="#">Редактировать</a>
-                <a href="#">Удалить</a>
+                <button class="btn link-primary" (click)="updateBook(b.id)"  >Редактировать</button>
+                <button class="btn link-danger" (click)="deleteBook(b.id)" >Удалить</button>
             </div>
+            <app-edit-book [updatedBook]="b" [toggleLock] = "b.id==togg"></app-edit-book>
         </div>
     </div>
 </div>

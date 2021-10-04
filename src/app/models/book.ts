@@ -1,9 +1,11 @@
 export class Book {
     
-    constructor(
-        public title: string,
-        public pages: number,
-        public genre: string){}
+  constructor(
+    public id: number,
+    public title: string,
+    public pages: number,
+    public genre: string
+  ){}
       
     /* get title(){
       return this._title
