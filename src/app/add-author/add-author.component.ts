@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Author } from '../models/author';
 import { Book } from '../models/book';
+import { Genre } from '../models/genre';
 import { AuthorCrudsService } from '../services/author-cruds.service';
+import { GenreCrudsService } from '../services/genre-cruds.service';
 
 @Component({
   selector: 'app-add-author',
@@ -10,6 +12,7 @@ import { AuthorCrudsService } from '../services/author-cruds.service';
   styleUrls: ['./add-author.component.css']
 })
 export class AddAuthorComponent implements OnInit {
+  genreList!: Genre[]
   toggle=false
   authorForm!: FormGroup
   firstName!:FormControl
@@ -21,12 +24,13 @@ export class AddAuthorComponent implements OnInit {
   numberOfPages!:FormControl
   genres!: FormControl
   books:Book[]=[new Book('fsfdsfd', 20,'fsfdsfd')]//книга добавлнена только для разработки
-  constructor( private cruds: AuthorCrudsService) { }
+  constructor( private cruds: AuthorCrudsService, private genreCrudService: GenreCrudsService) { }
 
   
   ngOnInit(): void {
     this.createControls();
     this.createForm();
+    this.genreList= this.genreCrudService.getAllGenre()
     
   }
   createControls(){

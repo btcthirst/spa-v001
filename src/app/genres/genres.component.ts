@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Genre } from '../models/genre';
-import { GenreService } from '../services/genre.service';
+import { GenreCrudsService } from '../services/genre-cruds.service';
+
 
 @Component({
   selector: 'app-genres',
@@ -9,14 +11,21 @@ import { GenreService } from '../services/genre.service';
 })
 export class GenresComponent implements OnInit {
   genres!:Genre[]
-  toggle=false
-  constructor(private genreService: GenreService) { }
+  
+  constructor(private genreService: GenreCrudsService, private routs: Router) { }
 
   ngOnInit(): void {
-    this.genres=this.genreService.getGenres()
+    this.getter()
+  }
+  getter(){
+    this.genres=this.genreService.getAllGenre()
   }
 
-  toggler(){
-    this.toggle = !this.toggle
+  deleteGenre(id: number){
+    this.genreService.deleteGenre(id)
+    this.getter()
+  }
+  updateGenre(id:number){
+    this.routs.navigate([`/genres/update/${id}`])
   }
 }

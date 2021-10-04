@@ -9,6 +9,7 @@ import { NotFoundPageComponent } from './not-found-page/not-found-page.component
 import { AddAuthorComponent } from './add-author/add-author.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddGenreComponent } from './add-genre/add-genre.component';
+import { UpdGenreComponent } from './upd-genre/upd-genre.component';
 
 
 
@@ -19,7 +20,8 @@ import { AddGenreComponent } from './add-genre/add-genre.component';
     GenresComponent,
     NotFoundPageComponent,
     AddAuthorComponent,
-    AddGenreComponent
+    AddGenreComponent,
+    UpdGenreComponent
   ],
   imports: [
     BrowserModule,

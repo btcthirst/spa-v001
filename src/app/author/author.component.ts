@@ -25,8 +25,10 @@ export class AuthorComponent implements OnInit {
     console.log("test update")
   }
 
-  deleteItem(){
-    console.log("test delete",)
+  deleteItem(id: number){
+    console.log("test del")
+    this.authorGet.deleteAuthor(id)
+    this.getter()
   }
   detailes(){
     console.log("test detailes")

@@ -39,7 +39,16 @@
         </div>
         <div>
             <label for="genres">Жанр</label>
-            <input class="form-control" type="text" id="genres" formControlName="genres">
+            
+            <select
+                class="form-control"
+                id="genres"
+                formControlName="genres"
+                
+            >
+                <option selected>Выберите жанр</option>
+                <option *ngFor="let g of genreList" > {{ g.name }}</option>
+            </select>
         </div> 
         <div>
             <input class="btn m-2" type="submit" >

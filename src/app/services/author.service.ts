@@ -106,18 +106,20 @@ export class AuthorService {
         a.books=auth.books
       }
     }
-    this.setAllToStorage(this.authors)
+    this.setAllToStorage(authors)
   }
 
   //удаление айтема
   deleteAuthor(id:number){
     let authors=this.getAllFromStorage()
-    authors.filter(a=>{
+    
+    authors=authors.filter(a=>{
       if(a.id!=id){
         return a
       }
       return null
     })
+    
     this.setAllToStorage(authors)
   }
 

@@ -1,12 +1,5 @@
 <div class="container">
-    <div *ngIf="!toggle" class="container pt-3">
-        <button (click)="toggler()" class="btn btn-light text-primary">Добавить жанр</button>
-        
-    </div>
-    <div *ngIf="toggle" class="container pt-3">
-        <button (click)="toggler()" class="btn btn-light text-primary">Отмена</button>
-        <app-add-genre></app-add-genre>
-    </div>
+    <a href="" [routerLink]="['add-genre']" routerLinkActive="active">Добавить жанр</a>
     <div class="container pt-5">
         <table class="table">
             <tr>
@@ -17,7 +10,10 @@
             <tr *ngFor="let g of genres">
                 <td>{{ g.name }}</td>
                 <td> {{ g.description }} </td>
-                <td><a href="">Редактировать</a><a href="">Удалить</a></td>
+                <td><input type="button" class="my-btn" (click)="updateGenre(g.id)" value="Редактировать"></td>
+                <td><input type="button" class="my-btn" (click)="deleteGenre(g.id)" value="Удалить"></td>
+                    
+                
             </tr>
             
         </table>
