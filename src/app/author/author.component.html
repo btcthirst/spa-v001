@@ -8,7 +8,15 @@
             <tr class="">
                 <th>Авторы</th>
                 <th>Книг в базе</th>
-                <th></th>
+                <th><input list="books" type="text" #tests id="search" autocomplete="off"> 
+                    
+                        <datalist *ngIf="test"  id="books">
+                            <option *ngFor="let bo of test.books" [value]="bo">{{bo}}</option>
+                        </datalist>
+                    
+                    
+                    <input type="button" (click)="finderIn(tests)" value="find">
+                </th>
             </tr>
             <tr *ngFor="let a of authors">
                 <td>{{ a.surname }} {{ a.firstName }} {{ a.patronymic }}  </td>

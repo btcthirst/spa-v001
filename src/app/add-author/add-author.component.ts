@@ -7,12 +7,14 @@ import { Genre } from '../models/genre';
 import { AuthorCrudsService } from '../services/author-cruds.service';
 import { GenreCrudsService } from '../services/genre-cruds.service';
 
+
 @Component({
   selector: 'app-add-author',
   templateUrl: './add-author.component.html',
   styleUrls: ['./add-author.component.css']
 })
 export class AddAuthorComponent implements OnInit {
+  
   genreList!: Genre[]
   toggle=false
   togg=0
@@ -57,7 +59,7 @@ export class AddAuthorComponent implements OnInit {
       firstName: this.firstName,
       patronymic:this.patronymic,
       bithDate: this.bithDate,
-      /* listBook: this.listBook */
+      
     });
   }
   addBook(){

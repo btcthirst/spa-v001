@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Author } from '../models/author';
 import { AuthorCrudsService } from '../services/author-cruds.service';
+import { SearchService } from '../services/search.service';
 
 
 @Component({
@@ -10,13 +11,23 @@ import { AuthorCrudsService } from '../services/author-cruds.service';
   styleUrls: ['./author.component.css']
 })
 export class AuthorComponent implements OnInit {
+  
+  test!: { books: string[]; authors: Author[]; }//for test
   authors!: Author[]
   constructor(private authorGet: AuthorCrudsService,
-    private router: Router  
+    private finder: SearchService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.getter()
+    
+  }
+
+  finderIn(inp: HTMLInputElement){
+
+    this.test = this.finder.findBook(inp.value)
+    console.log(this.test.books, this.test.authors)
   }
 
   getter(){
