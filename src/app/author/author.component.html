@@ -11,7 +11,10 @@
                 <th><input list="books" type="text" #tests id="search" autocomplete="off"> 
                     
                         <datalist *ngIf="test"  id="books">
-                            <option *ngFor="let bo of test.books" [value]="bo">{{bo}}</option>
+                            <ng-container *ngFor="let t  of test">
+                                <option *ngFor="let bo of t.books" [value]="bo+' '+t.author.surname">{{bo}}</option>
+                            </ng-container>
+                            
                         </datalist>
                     
                     

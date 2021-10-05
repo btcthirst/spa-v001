@@ -14,19 +14,21 @@ export class SearchService {
   }
   findBook(book: string){
     this.getAllAuthor()
-    let authors: Author[]=[]
-    let str: string[] = []
+    let res: {books: string[]; author: Author}[]=[]
+    let authors: Author
+    let str: string[]
     let regEx = new RegExp(book,'i')
     for(let a of this.authorsAll){
-      for(let b of a.books){
-        
+      str = []
+      for(let b of a.books){        
         if(regEx.test(b.title)){
-          str.push(b.title)
-          authors.push(a)
-        }
-        
+          str.push(b.title)          
+        }        
+      }
+      if(str[0]!=''){
+        res.push({books:str,author:a})
       }
     }
-    return {books:str, authors:authors}
+    return res
   }
 }

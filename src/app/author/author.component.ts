@@ -12,7 +12,7 @@ import { SearchService } from '../services/search.service';
 })
 export class AuthorComponent implements OnInit {
   
-  test!: { books: string[]; authors: Author[]; }//for test
+  test!: { books: string[]; author: Author; }[]//for test
   authors!: Author[]
   constructor(private authorGet: AuthorCrudsService,
     private finder: SearchService,
@@ -27,7 +27,7 @@ export class AuthorComponent implements OnInit {
   finderIn(inp: HTMLInputElement){
 
     this.test = this.finder.findBook(inp.value)
-    console.log(this.test.books, this.test.authors)
+    
   }
 
   getter(){
