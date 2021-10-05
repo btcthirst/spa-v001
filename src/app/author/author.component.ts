@@ -34,8 +34,12 @@ export class AuthorComponent implements OnInit {
     this.authorGet.deleteAuthor(id)
     this.getter()
   }
-  detailes(){
-    console.log("test detailes")
+  detailes(a: Author){
+    alert(`${a.surname} ${a.firstName} ${a.patronymic}
+    родился ${a.bithDate} 
+    у нас есть ${a.books.length} книг автора`)
+
+    console.log(a)
   }
 
 

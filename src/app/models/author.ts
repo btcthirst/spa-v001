@@ -5,7 +5,7 @@ export class Author {
         public id: number,
         public firstName: string,
         public surname:string,
-        public bithDate:Date,
+        public bithDate:string,
         public books: Book[],
         public patronymic?: string){}
 }

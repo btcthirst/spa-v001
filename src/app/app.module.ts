@@ -11,7 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AddGenreComponent } from './add-genre/add-genre.component';
 import { UpdGenreComponent } from './upd-genre/upd-genre.component';
 import { UpdAuthorComponent } from './upd-author/upd-author.component';
-import { EditBookComponent } from './edit-book/edit-book.component';
+
 
 
 
@@ -25,7 +25,7 @@ import { EditBookComponent } from './edit-book/edit-book.component';
     AddGenreComponent,
     UpdGenreComponent,
     UpdAuthorComponent,
-    EditBookComponent
+  
   ],
   imports: [
     BrowserModule,

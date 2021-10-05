@@ -3,10 +3,16 @@
         <div>
             <label for="surname">Фамилия</label>
             <input class="form-control" type="text" id="surname" formControlName="surname">
+            <p class="alert alert-danger" *ngIf="surname.errors&&surname.dirty">
+                поле не должно быть пустым
+            </p>
         </div>
         <div>
             <label for="firstName">Имя</label>
             <input class="form-control" type="text" id="firstName" formControlName="firstName">
+            <p class="alert alert-danger" *ngIf="firstName.errors&&firstName.dirty">
+                поле не должно быть пустым
+            </p>
         </div>
         <div>
             <label for="patronymic">Отчество</label>
@@ -15,6 +21,9 @@
         <div>
             <label for="bithDate">Дата рождения</label>
             <input class="form-control" type="date" id="bithDate" formControlName="bithDate">
+            <p class="alert alert-danger" *ngIf="bithDate.errors&&bithDate.dirty">
+                поле не должно быть пустым
+            </p>
         </div>
         <div>
             <label>Книги:</label>
@@ -32,10 +41,16 @@
         <div>
             <label for="title">Название</label>
             <input class="form-control" type="text" id="title" formControlName="title">
+            <p class="alert alert-danger" *ngIf="title.errors&&title.dirty">
+                поле не должно быть пустым
+            </p>
         </div>
         <div>
             <label for="numberOfPages">Количество страниц</label>
             <input class="form-control" type="number" id="numberOfPages" formControlName="numberOfPages" >
+            <p class="alert alert-danger" *ngIf="numberOfPages.errors&&numberOfPages.dirty">
+                поле не должно быть пустым
+            </p>
         </div>
         <div>
             <label for="genres">Жанр</label>
@@ -49,6 +64,9 @@
                 <option selected>Выберите жанр</option>
                 <option *ngFor="let g of genreList" > {{ g.name }}</option>
             </select>
+            <p class="alert alert-danger" *ngIf="genres.value=='Выберите жанр'">
+                выберите жанр
+            </p>
         </div> 
         <div>
             <input class="btn m-2" type="submit" >
@@ -62,10 +80,10 @@
                 <p> {{ b.genre }} {{ b.pages }} страниц</p>
             </div>
             <div class="d-flex flex-column">
-                <button class="btn link-primary" (click)="updateBook(b.id)"  >Редактировать</button>
+                <button class="btn link-primary" (click)="updateBook(b)"  >Редактировать</button>
                 <button class="btn link-danger" (click)="deleteBook(b.id)" >Удалить</button>
             </div>
-            <app-edit-book [updatedBook]="b" [toggleLock] = "b.id==togg"></app-edit-book>
+            
         </div>
     </div>
 </div>

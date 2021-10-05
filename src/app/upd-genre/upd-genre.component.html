@@ -3,10 +3,16 @@
         <div>
             <label for="name">Жанр</label>
             <input class="form-control" type="text" name="" id="name" formControlName="name">
+            <p class="alert alert-danger" *ngIf="name.errors&&name.dirty">
+                поле не должно быть пустым
+            </p>
         </div>
         <div>
             <label for="description">Описание</label>
             <textarea class="form-control" id="description"  formControlName="description"></textarea>
+            <p class="alert alert-danger" *ngIf="description.errors&&description.dirty">
+                поле не должно быть пустым
+            </p>
         </div>
         <div class="text-center">
             <input class="btn border border-success m-2" type="submit" value="Изменить">

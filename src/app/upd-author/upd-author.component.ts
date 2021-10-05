@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Author } from '../models/author';
 import { Book } from '../models/book';
 import { Genre } from '../models/genre';
@@ -20,7 +20,7 @@ export class UpdAuthorComponent implements OnInit {
   firstName!:FormControl
   patronymic!:FormControl
   surname!:FormControl
-  bithDare!: FormControl
+  bithDate!: FormControl
   listBook!: FormGroup
   title!: FormControl
   numberOfPages!:FormControl
@@ -28,7 +28,9 @@ export class UpdAuthorComponent implements OnInit {
   books!:Book[]
   constructor( private cruds: AuthorCrudsService,
     private genreCrudService: GenreCrudsService,
-    private activatedRouter: ActivatedRoute) { }
+    private activatedRouter: ActivatedRoute,
+    private router: Router  
+  ) { }
 
   
   ngOnInit(): void {
@@ -36,6 +38,15 @@ export class UpdAuthorComponent implements OnInit {
     this.getGenreList()
     this.createControls();
     this.createForm();    
+    this.addData();
+  }
+  addData(){
+    this.firstName.setValue(this.editingAuth.firstName);
+    this.patronymic.setValue(this.editingAuth.patronymic);
+    this.surname.setValue(this.editingAuth.surname);    
+    this.bithDate.setValue(this.editingAuth.bithDate);
+    
+    
   }
   getGenreList(){
     this.genreList= this.genreCrudService.getAllGenre()
@@ -47,20 +58,17 @@ export class UpdAuthorComponent implements OnInit {
         console.log("ошибка нет автора с таким ID")
       } else{
         this.editingAuth = testData as Author
-        this.books=this.editingAuth.books
-        
-      }
-      
-      
+        this.books=this.editingAuth.books        
+      }   
 
     })
   }
 
   createControls(){
-    this.firstName = new FormControl(`${this.editingAuth.firstName}`, Validators.required);
-    this.patronymic = new FormControl(`${this.editingAuth.patronymic}`);
-    this.surname = new FormControl(`${this.editingAuth.surname}`, Validators.required);
-    this.bithDare = new FormControl(`${this.editingAuth.bithDate}`, Validators.required);
+    this.firstName = new FormControl("", Validators.required);
+    this.patronymic = new FormControl("");
+    this.surname = new FormControl("", Validators.required);
+    this.bithDate = new FormControl("", Validators.required);
     this.title = new FormControl("", Validators.required);
     this.numberOfPages = new FormControl("", Validators.required);
     this.genres = new FormControl("", Validators.required);
@@ -75,7 +83,7 @@ export class UpdAuthorComponent implements OnInit {
       surname: this.surname,
       firstName: this.firstName,
       patronymic:this.patronymic,
-      bithDate: this.bithDare,
+      bithDate: this.bithDate,
       /* listBook: this.listBook */
     });
   }
@@ -90,6 +98,14 @@ export class UpdAuthorComponent implements OnInit {
       this.toggler()
     }
     
+  }
+  deleteBook(id: number){
+    this.books= this.books.filter(book=>{
+      if(book.id==id){
+        return null
+      }
+      return book
+    })
   }
 
   creatorId(){
@@ -109,6 +125,19 @@ export class UpdAuthorComponent implements OnInit {
     
   }
 
+  updateBook(b: Book){
+    this.toggler()
+    this.title.setValue(b.title)
+    this.numberOfPages.setValue(b.pages)
+    this.genres.setValue(b.genre)
+    this.books=this.books.filter(el=>{
+      if(el.id==b.id){
+        return null
+      }
+      return el
+    })
+  }
+
   onSubmit(){
     if(this.authorForm.valid && this.books.length>0){      
       let author =this.authorForm.value as Author
@@ -119,7 +148,7 @@ export class UpdAuthorComponent implements OnInit {
       this.editingAuth.patronymic= author.patronymic
       this.editingAuth.bithDate=author.bithDate
       this.cruds.updateAuthor(this.editingAuth)
-      this.authorForm.reset()  
+      this.router.navigate(['/authors']) 
     }
       
   }

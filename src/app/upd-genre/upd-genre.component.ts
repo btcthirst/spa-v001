@@ -12,7 +12,7 @@ import { GenreCrudsService } from '../services/genre-cruds.service';
 export class UpdGenreComponent implements OnInit {
   genre!: Genre
   updateGenreForm!: FormGroup
-  genreName!: FormControl
+  name!: FormControl
   description!: FormControl
   constructor(private genreCRUDService:GenreCrudsService,
     private routerActive: ActivatedRoute,
@@ -40,12 +40,12 @@ export class UpdGenreComponent implements OnInit {
   }
 
   createControl(){
-    this.genreName = new FormControl(`${this.genre.name}`, Validators.required);
+    this.name = new FormControl(`${this.genre.name}`, Validators.required);
     this.description = new FormControl(`${this.genre.description}`, Validators.required)
   }
   createForm(){
     this.updateGenreForm= new FormGroup({
-      name: this.genreName,
+      name: this.name,
       description: this.description
     })
   }

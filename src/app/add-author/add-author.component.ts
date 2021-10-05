@@ -20,7 +20,7 @@ export class AddAuthorComponent implements OnInit {
   firstName!:FormControl
   patronymic!:FormControl
   surname!:FormControl
-  bithDare!: FormControl
+  bithDate!: FormControl
   listBook!: FormGroup
   title!: FormControl
   numberOfPages!:FormControl
@@ -41,7 +41,7 @@ export class AddAuthorComponent implements OnInit {
     this.firstName = new FormControl("", Validators.required);
     this.patronymic = new FormControl();
     this.surname = new FormControl("", Validators.required);
-    this.bithDare = new FormControl("", Validators.required);
+    this.bithDate = new FormControl("", Validators.required);
     this.title = new FormControl("", Validators.required);
     this.numberOfPages = new FormControl("", Validators.required);
     this.genres = new FormControl("", Validators.required);
@@ -56,7 +56,7 @@ export class AddAuthorComponent implements OnInit {
       surname: this.surname,
       firstName: this.firstName,
       patronymic:this.patronymic,
-      bithDate: this.bithDare,
+      bithDate: this.bithDate,
       /* listBook: this.listBook */
     });
   }
@@ -99,8 +99,17 @@ export class AddAuthorComponent implements OnInit {
     
   }
 
-  updateBook(id: number){
-    this.togg=id
+  updateBook(b: Book){
+    this.toggler()
+    this.title.setValue(b.title)
+    this.numberOfPages.setValue(b.pages)
+    this.genres.setValue(b.genre)
+    this.books=this.books.filter(el=>{
+      if(el.id==b.id){
+        return null
+      }
+      return el
+    })
   }
 
   onSubmit(){

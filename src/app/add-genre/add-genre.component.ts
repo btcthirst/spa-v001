@@ -11,7 +11,7 @@ import { GenreCrudsService } from '../services/genre-cruds.service';
 })
 export class AddGenreComponent implements OnInit {
   addGenreForm!: FormGroup
-  genreName!: FormControl
+  name!: FormControl
   description!: FormControl
   constructor(private genreCRUDService:GenreCrudsService,
     private router: Router) { }
@@ -22,12 +22,12 @@ export class AddGenreComponent implements OnInit {
   }
 
   createControl(){
-    this.genreName = new FormControl('', Validators.required);
+    this.name = new FormControl('', Validators.required);
     this.description = new FormControl('', Validators.required)
   }
   createForm(){
     this.addGenreForm= new FormGroup({
-      name: this.genreName,
+      name: this.name,
       description: this.description
     })
   }
@@ -40,7 +40,7 @@ export class AddGenreComponent implements OnInit {
     if (this.addGenreForm.valid){
       console.log("submit it",this.addGenreForm.value)
       this.genreCRUDService.createGenre(this.addGenreForm.value as Genre)
-      this.addGenreForm.reset()
+      this.router.navigate(['/genres'])
     }
     
   }

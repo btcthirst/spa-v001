@@ -24,12 +24,14 @@ export class AuthorService {
   ]
   constructor() { 
     //наполняем массив Авторы
+
     this.authors=[
-      new Author(1,"Александр","Пушкин",new Date(6,6,1799),this.pushkinBooks,"Сергеевич"),
-      new Author(2,"Иван","Тургеньев",new Date(9,11,1818),this.turgenyevBooks,"Сергеевич"),
-      new Author(3,"Тарас","Шевченко",new Date(9,3,1814),this.shevchenkoBooks,"Григорьевич"),
+      new Author(1,"Александр","Пушкин",'1799-06-06',this.pushkinBooks,"Сергеевич"),
+      new Author(2,"Иван","Тургеньев",'1818-11-09',this.turgenyevBooks,"Сергеевич"),
+      new Author(3,"Тарас","Шевченко",'1814-03-09',this.shevchenkoBooks,"Григорьевич"),
     ]
   }
+  
   //возвращаем тестовый массив по запросу
   getAuthorFrom(){    
     return this.authors       

@@ -5,7 +5,7 @@
     
     <div class="container pt-5">
         <table class="table">
-            <tr>
+            <tr class="">
                 <th>Авторы</th>
                 <th>Книг в базе</th>
                 <th></th>
@@ -15,7 +15,7 @@
                 <td> {{ a.books.length }} </td>
                 <td><button class="link-primary m-2" (click)="updateItem(a.id)" >Редактировать</button>
                     <button class="link-danger m-2 " (click)="deleteItem(a.id)">Удалить</button>
-                    <button class="link-primary m-2">Детали</button>
+                    <button class="link-primary m-2" (click)="detailes(a)">Детали</button>
                 </td>
             </tr>
             
