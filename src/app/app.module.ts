@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AddGenreComponent } from './add-genre/add-genre.component';
 import { UpdGenreComponent } from './upd-genre/upd-genre.component';
 import { UpdAuthorComponent } from './upd-author/upd-author.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -30,7 +31,8 @@ import { UpdAuthorComponent } from './upd-author/upd-author.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

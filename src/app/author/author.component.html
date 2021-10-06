@@ -18,15 +18,15 @@
                         </datalist>
                     
                     
-                    <input type="button" (click)="finderIn(tests)" value="find">
+                    <input type="button" class="btn btn-success m-2" (click)="finderIn(tests)" value="find">
                 </th>
             </tr>
             <tr *ngFor="let a of authors">
                 <td>{{ a.surname }} {{ a.firstName }} {{ a.patronymic }}  </td>
                 <td> {{ a.books.length }} </td>
-                <td><button class="link-primary m-2" (click)="updateItem(a.id)" >Редактировать</button>
-                    <button class="link-danger m-2 " (click)="deleteItem(a.id)">Удалить</button>
-                    <button class="link-primary m-2" (click)="detailes(a)">Детали</button>
+                <td><button class="btn btn-primary m-2" (click)="updateItem(a.id)" >Редактировать</button>
+                    <button class="btn btn-danger m-2 " (click)="deleteItem(a.id)">Удалить</button>
+                    <button class="btn btn-secondary m-2" (click)="detailes(a)">Детали</button>
                 </td>
             </tr>
             

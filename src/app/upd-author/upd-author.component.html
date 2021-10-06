@@ -25,14 +25,14 @@
                 поле не должно быть пустым
             </p>
         </div>
-        <div>
+        <div class="m-2">
             <label>Книги:</label>
-            <a *ngIf="!toggle" class="btn link-primary" (click)="toggler()">Добавить книгу</a>
-            <a *ngIf="toggle" class="btn link-primary" (click)="toggler()">Отменить</a>
+            <a *ngIf="!toggle" class="btn btn-primary" (click)="toggler()">Добавить книгу</a>
+            <a *ngIf="toggle" class="btn btn-primary" (click)="toggler()">Отменить</a>
          </div>
         
         <div>
-            <input type="submit" class="btn m-2"> <input type="reset" class="btn m-2">
+            <input type="submit" class="btn btn-success m-2"> <input type="reset" class="btn btn-warning m-2">
         </div>
     </form>
     <form *ngIf="toggle" (ngSubmit)="addBook()" class="border border-secondary p-2 mt-3" [formGroup]="listBook">
@@ -69,8 +69,8 @@
             </p>
         </div> 
         <div>
-            <input class="btn m-2" type="submit" >
-            <input class="btn m-2" type="reset"  >
+            <input class="btn btn-success m-2" type="submit" >
+            <input class="btn btn-warning m-2" type="reset"  >
         </div>
     </form>
     <div> 
@@ -80,8 +80,8 @@
                 <p> {{ b.genre }} {{ b.pages }} страниц</p>
             </div>
             <div class="d-flex flex-column">
-                <button class="btn link-primary" (click)="updateBook(b)"  >Редактировать</button>
-                <button class="btn link-danger" (click)="deleteBook(b.id)" >Удалить</button>
+                <button class="btn btn-primary m-1" (click)="updateBook(b)"  >Редактировать</button>
+                <button class="btn btn-danger m-1" (click)="deleteBook(b.id)" >Удалить</button>
             </div>
         </div>
     </div>
